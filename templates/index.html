@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator iOS 17</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="calculator">
+        <form method="POST">
+            <input type="text" name="expression" id="display" value="{{ result }}" readonly>
+            <div class="buttons">
+                <!-- Row 1 -->
+                <button type="button" onclick="append('C')">C</button>
+                <button type="button" onclick="append('/')">÷</button>
+                <button type="button" onclick="append('*')">×</button>
+                <button type="button" onclick="append('-')">−</button>
+                <!-- Row 2 -->
+                <button type="button" onclick="append('7')">7</button>
+                <button type="button" onclick="append('8')">8</button>
+                <button type="button" onclick="append('9')">9</button>
+                <button type="button" onclick="append('+')">+</button>
+                <!-- Row 3 -->
+                <button type="button" onclick="append('4')">4</button>
+                <button type="button" onclick="append('5')">5</button>
+                <button type="button" onclick="append('6')">6</button>
+                <button type="submit">=</button>
+                <!-- Row 4 -->
+                <button type="button" onclick="append('1')">1</button>
+                <button type="button" onclick="append('2')">2</button>
+                <button type="button" onclick="append('3')">3</button>
+                <button type="button" onclick="append('0')">0</button>
+                <!-- Row 5 -->
+                <button type="button" onclick="deleteLast()">←</button> <!-- Tombol Delete -->
+            </div>
+        </form>
+    </div>
+    <script>
+        function append(value) {
+            const display = document.getElementById("display");
+            if (value === "C") {
+                display.value = "";
+            } else {
+                display.value += value;
+            }
+            animateDisplay();
+        }
+
+        function deleteLast() {
+            const display = document.getElementById("display");
+            display.value = display.value.slice(0, -1); // Menghapus karakter terakhir
+            animateDisplay();
+        }
+
+        function animateDisplay() {
+            const display = document.getElementById("display");
+            display.classList.add("button-pressed");
+            setTimeout(function() {
+                display.classList.remove("button-pressed");
+            }, 300); // Animasi input dengan durasi 300ms
+        }
+    </script>
+</body>
+</html>
